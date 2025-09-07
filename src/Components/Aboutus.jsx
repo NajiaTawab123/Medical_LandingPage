@@ -1,44 +1,84 @@
 import React from "react";
 import { Star } from "lucide-react";
+import { motion } from "framer-motion"; 
+
+// images
+const profilePics = [
+  "/Img/m1.png",
+  "/Img/m2.png",
+  "/Img/m3.png",
+  "/Img/m4.png",
+  "/Img/m5.png",
+  "/Img/m6.png",
+];
 
 function Aboutus() {
   return (
-    <div className="bg-[#E1EEFF] mt-18 py-16 px-8 flex flex-col md:flex-row justify-center items-start md:items-stretch gap-10 h-auto md:h-[70vh]">
-      {/* LEFT SECTION */}
-      <div className="flex-1 md:mt-20 ml-54 max-sm:ml-4">
-        <h1 className="text-3xl md:text-4xl font-bold mb-6 text-center md:text-left">
-          What Our <span className="text-blue-500">Member's</span> <br className="hidden md:block" />
+    <motion.div
+      className="bg-[#E1EEFF] mt-18 py-16 px-8 flex flex-col md:flex-row justify-center items-start md:items-stretch gap-10 h-auto md:h-[70vh]"
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8 }}
+      viewport={{ once: true }}
+    >
+      {/* Left side */}
+      <motion.div
+        className="flex-1 md:mt-20 ml-54 max-sm:ml-4"
+        initial={{ x: -80, opacity: 0 }}
+        whileInView={{ x: 0, opacity: 1 }}
+        transition={{ duration: 0.8 }}
+        viewport={{ once: true }}
+      >
+        <h1 className="text-3xl md:text-4xl font-bold mb-6 text-center md:text-left font-sans">
+          What Our <span className="text-blue-500">Member's</span>
+          <br className="hidden md:block" />
           Saying About Us
         </h1>
-        <p className="text-[12px] mb-6 text-center md:text-left">
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. <br className="hidden md:block" />
-          Assumenda aperiam modi nostrum consequuntur.
+        <p className="text-[13px] leading-relaxed mb-6 text-center md:text-left text-gray-700 font-light">
+          Real experiences from patients who found care they can trust.
+          <br className="hidden md:block" />
+          Hear how our platform makes healthcare simpler and more reliable.
         </p>
 
-        {/* Profile Icons + Reviews */}
+        {/* Profile Icons and Reviews */}
         <div className="flex items-center justify-center md:justify-start space-x-4">
           <div className="flex -space-x-4">
-            {[...Array(6)].map((_, i) => (
-              <img
+            {profilePics.map((pic, i) => (
+              <motion.img
                 key={i}
-                src={`https://api.dicebear.com/6.x/adventurer/svg?seed=anime${i}`}
-                alt="profile"
+                src={pic}
+                alt={`profile-${i}`}
                 className="w-10 h-10 rounded-full border-2 border-white"
+                whileHover={{ scale: 1.2, rotate: 5 }}
+                transition={{ type: "spring", stiffness: 200 }}
               />
             ))}
           </div>
-          <button className="text-sm font-semibold">100+ Reviews</button>
+          <motion.button
+            className="text-sm font-semibold"
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            100+ Reviews
+          </motion.button>
         </div>
-      </div>
+      </motion.div>
 
-      {/* RIGHT SECTION (Review Card) */}
-      <div className="flex-1 w-full md:w-[400px] h-auto md:h-[250px] bg-white rounded-[20px] shadow-md overflow-hidden mt-10 md:mt-16 mr-0 md:mr-40">
+      {/* Right side (Review Card) */}
+      <motion.div
+        className="flex-1 w-full md:w-[400px] h-auto md:h-[250px] bg-white rounded-[20px] shadow-md overflow-hidden mt-10 md:mt-16 mr-0 md:mr-40"
+        initial={{ x: 80, opacity: 0 }}
+        whileInView={{ x: 0, opacity: 1 }}
+        transition={{ duration: 0.8 }}
+        viewport={{ once: true }}
+      >
         <div className="flex flex-col md:flex-row items-center p-4">
           <div className="flex items-center ml-0 md:ml-4 mt-4 md:mt-8">
-            <img
-              src="https://api.dicebear.com/6.x/adventurer/svg?seed=Sasuke"
+            <motion.img
+              src={profilePics[0]}
               alt="profile"
               className="w-12 h-12 rounded-full border-2 border-gray-200"
+              whileHover={{ scale: 1.1 }}
             />
             <div className="ml-3 text-center md:text-left">
               <h1 className="text-sm font-semibold">Jane Cooper</h1>
@@ -49,26 +89,32 @@ function Aboutus() {
           {/* Stars */}
           <div className="flex space-x-1 px-0 md:px-4 ml-0 md:ml-28 mt-4 md:mt-8 justify-center md:justify-start">
             {[...Array(5)].map((_, i) => (
-              <Star
+              <motion.div
                 key={i}
-                className="w-6 h-6 text-yellow-400 fill-yellow-400"
-              />
+                initial={{ scale: 0 }}
+                whileInView={{ scale: 1 }}
+                transition={{ delay: i * 0.1, type: "spring" }}
+              >
+                <Star className="w-6 h-6 text-yellow-400 fill-yellow-400" />
+              </motion.div>
             ))}
           </div>
         </div>
 
         {/* Review text */}
-        <p className="text-[11px] text-justify pt-4 px-6 md:pl-10 md:pr-10 pb-10">
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eaque
-          eveniet neque nostrum deleniti, autem cumque perspiciatis quos
-          consequatur saepe, nemo maiores vero nulla possimus vel quae. Ut
-          adipisci totam nemo.
-          eveniet neque nostrum deleniti, autem cumque perspiciatis quos
-          consequatur saepe, nemo maiores vero nulla possimus vel quae. Ut
-          adipisci totam nemo.
-        </p>
-      </div>
-    </div>
+        <motion.p
+          className="text-[12px] text-justify pt-4 px-6 md:pl-10 md:pr-10 pb-10 text-gray-600 leading-relaxed"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 1, delay: 0.2 }}
+          viewport={{ once: true }}
+        >
+          “Booking an appointment was so easy and stress-free. The doctor I
+          connected with was professional, kind, and attentive. I finally feel
+          like I have access to healthcare I can rely on.”
+        </motion.p>
+      </motion.div>
+    </motion.div>
   );
 }
 
